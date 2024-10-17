@@ -3,29 +3,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class SmoothHealthBar : MonoBehaviour
+public class SmoothHealthBar : HealthBar
 {
-    private Slider _slider;
-
-    private void Awake()
-    {
-        _slider = GetComponent<Slider>();
-    }
-
-    public void DisplayOnStartup(Health health)
-    {
-        _slider.maxValue = health.MaxValue;
-        _slider.value = health.CurrentValue;
-    }
-
-    public IEnumerator DisplaySmoothly(Health health)
-    {
-        float speed = 10f;
-
-        while (_slider.value != health.CurrentValue)
-        {
-            _slider.value = Mathf.MoveTowards(_slider.value, health.CurrentValue, speed * Time.deltaTime);
-            yield return null;
-        }
-    }
+    protected override void ChangeSliderOf(Health health, Slider slider)
+	{
+	   StartCoroutine(ChangeSmoothly(health, slider));
+	}
+	
+	private IEnumerator ChangeSmoothly(Health health, Slider slider)
+	{
+		float speed = 10f;
+		
+		while (slider.value != health.CurrentValue)
+		{
+			slider.value = Mathf.MoveTowards(slider.value, health.CurrentValue, speed * Time.deltaTime);
+			yield return null;
+		}
+	}
 }

@@ -2,17 +2,22 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class TextHealthIndicator : MonoBehaviour
+public class TextHealthIndicator : HealthIndicator
 {
-    private TextMeshProUGUI _text;
+   private TextMeshProUGUI _text;
 
-    private void Awake()
-    {
-        _text = GetComponent<TextMeshProUGUI>();
-    }
+	private void Awake()
+	{
+		_text = GetComponent<TextMeshProUGUI>();
+	}
+	
+	protected override void Display(Health health)
+	{
+		DisplayOnStartup(health);
+	}
 
-    public void Display(Health health)
-    {
-        _text.text = $"{health.CurrentValue} / {health.MaxValue}";
-    }
+	protected override void DisplayOnStartup(Health health)
+	{
+		_text.text = $"{health.CurrentValue} / {health.MaxValue}";
+	}
 }

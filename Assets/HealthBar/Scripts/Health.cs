@@ -7,15 +7,11 @@ public class Health : MonoBehaviour
 
     private float _minValue = 0f;
     private float _currentValue;
-    private bool _isDead;
 
-    public event Action Increased;
-    public event Action Decreased;
-    public event Action Died;
+    public event Action Changed;
 
     public float CurrentValue => _currentValue;
     public float MaxValue => _maxValue;
-    public bool IsDead => _isDead;
 
     private void Awake()
     {
@@ -31,9 +27,7 @@ public class Health : MonoBehaviour
 
         TryIncreaseToMinimumValue();
 
-        TryDie();
-
-        Decreased?.Invoke();
+        Changed?.Invoke();
     }
 
     public void Increase(float value)
@@ -45,16 +39,7 @@ public class Health : MonoBehaviour
 
         TryReduceToMaxValue();
 
-        Increased?.Invoke();
-    }
-
-    private void TryDie()
-    {
-        if (_currentValue <= _minValue)
-        {
-            _isDead = true;
-            Died?.Invoke();
-        }
+        Changed?.Invoke();
     }
 
     private void TryIncreaseToMinimumValue()
