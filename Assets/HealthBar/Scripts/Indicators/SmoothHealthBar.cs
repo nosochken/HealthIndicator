@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class SmoothHealthBar : HealthBar
 {
     protected override void ChangeSliderOf(Health health, Slider slider)
-	{
-	   StartCoroutine(ChangeSmoothly(health, slider));
-	}
-	
-	private IEnumerator ChangeSmoothly(Health health, Slider slider)
-	{
-		float speed = 10f;
-		
-		while (slider.value != health.CurrentValue)
-		{
-			slider.value = Mathf.MoveTowards(slider.value, health.CurrentValue, speed * Time.deltaTime);
-			yield return null;
-		}
-	}
+    {
+        StartCoroutine(ChangeSmoothly(health, slider));
+    }
+
+    private IEnumerator ChangeSmoothly(Health health, Slider slider)
+    {
+        float speed = 10f;
+
+        while (slider.value != health.CurrentValue)
+        {
+            slider.value = Mathf.MoveTowards(slider.value, health.CurrentValue, speed * Time.deltaTime);
+            yield return null;
+        }
+    }
 }
