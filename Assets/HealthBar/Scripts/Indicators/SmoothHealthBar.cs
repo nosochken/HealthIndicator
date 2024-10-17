@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class SmoothHealthBar : HealthBar
 {
-    protected override void ChangeSliderOf(Health health, Slider slider)
+    protected override void DisplaySliderOf(Health health, Slider slider)
     {
         StartCoroutine(ChangeSmoothly(health, slider));
     }

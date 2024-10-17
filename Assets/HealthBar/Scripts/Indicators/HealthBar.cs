@@ -19,10 +19,10 @@ public class HealthBar : HealthIndicator
 
     protected override void Display(Health health)
     {
-        ChangeSliderOf(health, _slider);
+        DisplaySliderOf(health, _slider);
     }
 
-    protected virtual void ChangeSliderOf(Health health, Slider slider)
+    protected virtual void DisplaySliderOf(Health health, Slider slider)
     {
         slider.value = health.CurrentValue;
     }
